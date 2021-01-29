@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../../constants.dart';
 
@@ -23,6 +24,7 @@ class _CartCounterState extends State<CartCounter> {
           icon: Icons.remove,
           press: () {
             if (widget.currentQty >= 0) {
+              HapticFeedback.heavyImpact();
               setState(() {
                 widget.setQty(widget.currentQty-1);
               });
@@ -40,6 +42,7 @@ class _CartCounterState extends State<CartCounter> {
         buildOutlineButton(
             icon: Icons.add,
             press: () {
+              HapticFeedback.heavyImpact();
               setState(() {
                 widget.setQty(widget.currentQty+1);
               });

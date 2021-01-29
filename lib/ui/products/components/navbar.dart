@@ -28,8 +28,11 @@ class _NavBarState extends State<NavBar> {
         });
   }
 
-  Card buildCard(BuildContext context, Cart cart) {
+  Widget buildCard(BuildContext context, Cart cart) {
     double total = cart?.getTotal()??0;
+    if(total == 0) {
+      return Divider();
+    }
     return Card(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20))),
     child: Padding(

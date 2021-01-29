@@ -11,10 +11,11 @@ class Product{
   String name;
   double price;
   double discountedPrice;
+  String category;
 
 
   Product({this.id, this.imagePath, this.isAvailable, this.name, this.price,
-      this.discountedPrice});
+      this.discountedPrice, this.category});
 
   factory Product.fromJson(Map<String, dynamic> json) =>
       _$ProductFromJson(json);

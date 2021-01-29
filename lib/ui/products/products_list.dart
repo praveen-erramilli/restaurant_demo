@@ -28,10 +28,18 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
       backgroundColor: kBackgroundColor,
       appBar: AppBar(
         title: Center(
-            child: Text(
-          'Menu',
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(width: 20,),
+                Icon(Icons.fastfood),
+                SizedBox(width: 10,),
+                Text(
+                  'Menu',
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-        )),
+        ),
+              ],
+            )),
         actions: [
           IconButton(icon: Icon(Icons.qr_code_scanner_sharp), onPressed: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) => QRViewExample(onScan: (String data) {

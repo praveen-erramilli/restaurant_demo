@@ -1,4 +1,5 @@
 import 'dart:collection';
+import 'dart:math';
 
 import 'package:get_it/get_it.dart';
 import 'package:restaurant_demo/models/product.dart';
@@ -31,6 +32,11 @@ class Cart {
     products.forEach((key, value) {
       total = total + (value.price * productsQty[key]);
     });
-    return total;
+    return roundToDecimalPlaces(total, 2);
+  }
+
+  static double roundToDecimalPlaces(double number, int numberOfDecimals) {
+    double mod = pow(10.0, numberOfDecimals);
+    return ((number * mod).round().toDouble() / mod);
   }
 }
