@@ -24,6 +24,6 @@ Test Data 2
 
 ## Screenshots
 
-![Screenshot1](screenshots/ss1.jpg)
-![Screenshot2](screenshots/ss2.jpg)
-![Screenshot3](screenshots/ss3.jpg)
+![Screenshot1](screenshots/ss1.jpg =100x20)
+![Screenshot2](screenshots/ss2.jpg =100x20)
+![Screenshot3](screenshots/ss3.jpg =100x20)
