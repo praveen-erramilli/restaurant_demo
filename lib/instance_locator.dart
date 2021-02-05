@@ -1,6 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:restaurant_demo/service/cartservice.dart';
-import 'package:restaurant_demo/service/prouct_holder_service.dart';
+import 'package:restaurant_demo/service/product_holder_service.dart';
 
 import 'models/cart.dart';
 

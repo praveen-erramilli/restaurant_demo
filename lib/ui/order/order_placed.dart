@@ -1,109 +1,102 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:restaurant_demo/constants.dart';
 import 'package:restaurant_demo/models/cart.dart';
 import 'package:restaurant_demo/models/product_holder.dart';
 import 'package:restaurant_demo/service/cartservice.dart';
-import 'package:restaurant_demo/service/prouct_holder_service.dart';
-import 'dart:async';
-class timer extends StatefulWidget {
+import 'package:restaurant_demo/service/product_holder_service.dart';
+
+class MyTimer extends StatefulWidget {
   @override
-  _timerState createState() => _timerState();
+  _MyTimerState createState() => _MyTimerState();
 }
 
-class _timerState extends State<timer> {
+class _MyTimerState extends State<MyTimer> {
   final interval = const Duration(seconds: 1);
 
   final int timerMaxSeconds = 12;
 
   int currentSeconds = 0;
-  bool  _isVisible = true;
+  bool _isTimerVisible = true;
 
   String get timerText =>
-      '${((timerMaxSeconds - currentSeconds) ~/ 12).toString().padLeft(2, '0')}: ${((timerMaxSeconds - currentSeconds) % 60).toString().padLeft(2, '0')}';
+      '00 : ${((timerMaxSeconds - currentSeconds) % 60).toString().padLeft(2, '0')}';
 
   startTimeout([int milliseconds]) {
     var duration = interval;
     Timer.periodic(duration, (timer) {
       setState(() {
-        print(timer.tick);
         currentSeconds = timer.tick;
-        if (timer.tick >= timerMaxSeconds) timer.cancel();
+        if (timer.tick >= timerMaxSeconds) {
+          timer.cancel();
+          _isTimerVisible = false;
+        }
       });
     });
-    //_isVisible=false;
   }
 
   @override
   void initState() {
-    startTimeout();
     super.initState();
-    setState(() {
-    });
+    startTimeout();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: InkWell(
-          onTap: () {
-            GetIt.I<ProductHolderService>().cachedProductHolder = ProductHolder();
-            GetIt.I<CartService>().cachedCart = Cart(products: {}, productsQty: {});
-            Navigator.pop(context);
-          },
-          child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Column(
-                      children: [
-                        Visibility(
-                          child: RaisedButton(
-                            onPressed: () { setState(() {
-                              _isVisible=false;
-                            }); },
-                            child: Visibility(child: Text(timerText),
-                            ),
-                          ),
-                          visible: _isVisible,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Visibility(child: RaisedButton.icon(
-                                splashColor: Colors.blue,
-                                padding: EdgeInsets.all(30) ,
-                                onPressed: () {}, icon: Icon(Icons.fastfood,size: 30,) , label: Text("Checkout Online",
-                              style: TextStyle(
-                                fontFamily: "Muli",
-                                fontSize: 20,
-                              ),)),
-                              visible: _isVisible=true,),
-                          ],
-                        ),
-                        SizedBox(height: 30,),
-                        Container(
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [RaisedButton.icon(
-                                splashColor: Colors.green,
-                                padding: EdgeInsets.all(30) ,
-                                onPressed: () {}, icon: Icon(Icons.fastfood, size: 30,) , label: Text("Checkout at Restaurant",
-                              style: TextStyle(
-                                fontFamily: "Muli",
-                                fontSize: 20,
-                              ),)
-                            ),
-
-                            ],),
-                        )
-                      ]
-                  ),
-                ],
-              ))),
+      body: Center(
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Visibility(
+          child: Visibility(
+            child: Container(
+              width: 100,
+              height: 100,
+              decoration:
+                  ShapeDecoration(shape: CircleBorder(), color: kPrimaryColor),
+              child: Center(
+                  child: Text(
+                timerText,
+                style: TextStyle(color: Colors.white),
+                textAlign: TextAlign.center,
+              )),
+            ),
+          ),
+          visible: _isTimerVisible,
+        ),
+        Visibility(
+            visible: !_isTimerVisible,
+            child: ElevatedButton.icon(
+                onPressed: () {
+                  GetIt.I<ProductHolderService>().cachedProductHolder = ProductHolder();
+                  GetIt.I<CartService>().cachedCart = Cart(products: {}, productsQty: {});
+                  Navigator.popUntil(context, (route) => route.isFirst);
+                },
+                icon: Icon(
+                  Icons.fastfood,
+                  size: 30,
+                ),
+                label: Text("Checkout Online"))),
+        SizedBox(
+          width: 20,
+        ),
+        Visibility(
+            visible: !_isTimerVisible,
+            child: ElevatedButton.icon(
+                onPressed: () {
+                  GetIt.I<ProductHolderService>().cachedProductHolder = ProductHolder();
+                  GetIt.I<CartService>().cachedCart = Cart(products: {}, productsQty: {});
+                  Navigator.popUntil(context, (route) => route.isFirst);
+                },
+                icon: Icon(
+                  Icons.fastfood,
+                  size: 30,
+                ),
+                label: Text("Checkout at Restaurant"))),
+      ])),
     );
   }
 }
-
-
-

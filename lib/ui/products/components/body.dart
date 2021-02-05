@@ -7,7 +7,7 @@ import 'package:restaurant_demo/models/cart.dart';
 import 'package:restaurant_demo/models/product.dart';
 import 'package:restaurant_demo/models/product_holder.dart';
 import 'package:restaurant_demo/service/cartservice.dart';
-import 'package:restaurant_demo/service/prouct_holder_service.dart';
+import 'package:restaurant_demo/service/product_holder_service.dart';
 import 'package:restaurant_demo/service/qr_scanner_service.dart';
 import 'package:restaurant_demo/ui/products/components/item_card.dart';
 

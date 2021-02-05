@@ -1,12 +1,12 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
 import 'package:restaurant_demo/models/cart.dart';
-import 'package:restaurant_demo/models/product.dart';
 import 'package:restaurant_demo/models/product_holder.dart';
 import 'package:restaurant_demo/service/cartservice.dart';
-import 'package:restaurant_demo/service/prouct_holder_service.dart';
+import 'package:restaurant_demo/service/product_holder_service.dart';
 import 'package:restaurant_demo/service/qr_scanner_service.dart';
 
 import '../../constants.dart';
@@ -24,6 +24,9 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
     return Scaffold(
       backgroundColor: kBackgroundColor,
       appBar: AppBar(

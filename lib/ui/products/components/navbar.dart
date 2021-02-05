@@ -43,7 +43,7 @@ class _NavBarState extends State<NavBar> {
           if(total <= 0) {
             return;
           }
-          Navigator.push(context, MaterialPageRoute(builder: (context) => OrderPlaced()));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => MyTimer()));
         },
         child: Text('Place Order', style: TextStyle(color: Colors.white),),),
       ),
