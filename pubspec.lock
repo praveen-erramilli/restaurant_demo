@@ -388,7 +388,7 @@ packages:
       name: qr_code_scanner
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.3.0"
+    version: "0.3.2"
   quiver:
     dependency: transitive
     description:
@@ -522,4 +522,4 @@ packages:
     version: "2.2.1"
 sdks:
   dart: ">=2.10.0 <2.11.0"
-  flutter: ">=1.10.0 <2.0.0"
+  flutter: ">=1.10.0"
